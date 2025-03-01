@@ -20,10 +20,15 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'national_code', // به جای email
+        // 'email',
         'password',
     ];
 
+    public function getAuthIdentifierName()
+    {
+        return 'national_code';
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

@@ -10,7 +10,7 @@ use Livewire\Volt\Component;
 
 new #[Layout('components.layouts.auth')] class extends Component {
     public string $name = '';
-    public string $email = '';
+    public string $national_code = '';
     public string $password = '';
     public string $password_confirmation = '';
 
@@ -21,7 +21,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
     {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'national_code' => ['required', 'string', 'digits:10', 'unique:' . User::class . ',national_code'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -43,63 +43,78 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
     <form wire:submit="register" class="flex flex-col gap-6">
         <!-- Name -->
-        <flux:input
-            wire:model="name"
-            id="name"
-            :label="__('Name')"
-            type="text"
-            name="name"
-            required
-            autofocus
-            autocomplete="name"
-            placeholder="Full name"
-        />
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">نام</label>
+            <input
+                wire:model="name"
+                id="name"
+                type="text"
+                name="name"
+                required
+                autofocus
+                autocomplete="name"
+                placeholder="نام کامل"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+            />
+        </div>
 
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            id="email"
-            :label="__('Email address')"
-            type="email"
-            name="email"
-            required
-            autocomplete="email"
-            placeholder="email@example.com"
-        />
+        <!-- National Code -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">کد ملی</label>
+            <input
+                wire:model="national_code"
+                id="national_code"
+                type="text"
+                name="national_code"
+                required
+                autocomplete="national-code"
+                placeholder="1234567890"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+            />
+        </div>
 
         <!-- Password -->
-        <flux:input
-            wire:model="password"
-            id="password"
-            :label="__('Password')"
-            type="password"
-            name="password"
-            required
-            autocomplete="new-password"
-            placeholder="Password"
-        />
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">رمز عبور</label>
+            <input
+                wire:model="password"
+                id="password"
+                type="password"
+                name="password"
+                required
+                autocomplete="new-password"
+                placeholder="رمز عبور"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+            />
+        </div>
 
         <!-- Confirm Password -->
-        <flux:input
-            wire:model="password_confirmation"
-            id="password_confirmation"
-            :label="__('Confirm password')"
-            type="password"
-            name="password_confirmation"
-            required
-            autocomplete="new-password"
-            placeholder="Confirm password"
-        />
+        <div>
+            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">تکرار رمز عبور</label>
+            <input
+                wire:model="password_confirmation"
+                id="password_confirmation"
+                type="password"
+                name="password_confirmation"
+                required
+                autocomplete="new-password"
+                placeholder="تکرار رمز عبور"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+            />
+        </div>
 
         <div class="flex items-center justify-end">
-            <flux:button type="submit" variant="primary" class="w-full">
-                {{ __('Create account') }}
-            </flux:button>
+            <button
+                type="submit"
+                class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+                ثبت‌نام
+            </button>
         </div>
     </form>
 
     <div class="space-x-1 text-center text-sm text-zinc-600 dark:text-zinc-400">
-        Already have an account?
-        <flux:link :href="route('login')" wire:navigate>Log in</flux:link>
+        حساب کاربری دارید؟
+        <flux:link :href="route('login')" wire:navigate>ورود</flux:link>
     </div>
 </div>
