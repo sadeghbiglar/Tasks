@@ -12,21 +12,23 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group heading="Platform" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                <flux:navlist.group heading="منو امکانات" class="grid">
+                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('داشبورد') }}</flux:navlist.item >
+                    <flux:navlist.item icon="home" :href="route('home')" :current="request()->routeIs('home')" wire:navigate>{{ __('صفحه اصلی') }}</flux:navlist.item>
+
                 </flux:navlist.group>
             </flux:navlist>
 
             <flux:spacer />
 
             <flux:navlist variant="outline">
-                <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
+                {{-- <flux:navlist.item icon="folder-git-2" href="https://github.com/laravel/livewire-starter-kit" target="_blank">
                 {{ __('Repository') }}
                 </flux:navlist.item>
 
                 <flux:navlist.item icon="book-open-text" href="https://laravel.com/docs/starter-kits" target="_blank">
                 {{ __('Documentation') }}
-                </flux:navlist.item>
+                </flux:navlist.item> --}}
             </flux:navlist>
 
             <!-- Desktop User Menu -->
